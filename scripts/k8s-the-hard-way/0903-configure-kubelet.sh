@@ -21,6 +21,8 @@ case "$INTERNAL_IP" in
   ;;
 esac
 
+sudo mkdir -p /etc/kubernetes/manifests
+
 cat <<EOF | sudo tee /var/lib/kubelet/kubelet-config.yaml
 kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -40,6 +42,7 @@ podCIDR: "${POD_CIDR}"
 runtimeRequestTimeout: "15m"
 tlsCertFile: "/var/lib/kubelet/${HOSTNAME}.pem"
 tlsPrivateKeyFile: "/var/lib/kubelet/${HOSTNAME}-key.pem"
+staticPodPath: /etc/kubernetes/manifests
 EOF
 
 cat <<EOF | sudo tee /etc/systemd/system/kubelet.service

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-kubectl run nginx --image=nginx
+kubectl create deployment nginx --image=nginx
 
 watch kubectl get pods -l run=nginx

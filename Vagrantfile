@@ -3,9 +3,10 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
-
+  config.vbguest.auto_update = false
+  
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "512"
+    vb.memory = "1024"
   end
 
   # must be at the top
@@ -16,7 +17,7 @@ Vagrant.configure("2") do |config|
       c.vm.provision :shell, :path => "scripts/bootstrap/vagrant-setup-haproxy.sh"
 
       c.vm.provider "virtualbox" do |vb|
-        vb.memory = "256"
+        vb.memory = "512"
       end
   end
 
